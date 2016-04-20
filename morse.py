@@ -49,7 +49,7 @@ morse = {
     '@': 'dot-dash-dash-dot-dash-dot',
     'start': 'dash-dot-dash-dot-dash',
     'end': 'dot-dot-dot-dash-dot-dash',
-    ' ': '_'
+    ' ': '__'
 }
 
 message = str(raw_input('What is your message? '))
@@ -57,12 +57,12 @@ message = str(raw_input('What is your message? '))
 def translate(message):
     #Cleans up the user input message and translates it to morse.
     message_lower = message.lower()
-    morse_message = morse['start']+'_______'
+    morse_message = morse['start']+'______'
 
     for letter in message_lower:
         if letter in morse:
             morse_message += morse[letter]
-            morse_message += '___'
+            morse_message += '__'
     morse_message += '____'+ morse['end']
     return morse_message
 
@@ -73,8 +73,8 @@ def broadcast(morse_message):
     #over the GPIO pins on a Raspberry Pi.
     broadcast_message = ''
     single_chars_to_broadcast = ['a', 'o', '_']
-    pins = [17,22]
-    dot = 0.15
+    pins = [17,22] #Modify to add/subtract/change the GPIO pins.
+    dot = 0.15 #Length in seconds for one "dot".
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(pins, GPIO.OUT)
 
